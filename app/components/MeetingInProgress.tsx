@@ -133,23 +133,23 @@ export default function MeetingInProgress({ meeting }: MeetingInProgressProps) {
   }
 
   return (
-    <div className="min-h-screen bg-[#eceae2] px-2 py-8 text-[#1f1f1d] md:px-6">
+    <div className="min-h-svh bg-[#eceae2] px-2 py-0 text-[#1f1f1d] md:min-h-screen md:px-6 md:py-8">
       <div className="mx-auto w-full max-w-[1020px]">
-        <div className="mb-7 flex items-center justify-between border-b border-dashed border-[#d4d1c9] pb-6">
-          <p className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.32em] text-[#2d2d2a]">
+        <div className="mb-7 hidden flex-col gap-3 border-b border-dashed border-[#d4d1c9] pb-6 sm:flex-row sm:items-center sm:justify-between md:flex">
+          <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[#2d2d2a] sm:text-[12px] sm:tracking-[0.32em]">
             <span className="h-2.5 w-2.5 rounded-[3px] bg-[#1b1b19]" />
             This Could Have Been An Email
           </p>
-          <p className="font-mono text-[12px] uppercase tracking-[0.24em] text-[#76736d]">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#76736d] sm:text-[12px] sm:tracking-[0.24em]">
             2026.05.08 · No. 9835
           </p>
         </div>
 
-        <div className="rounded-[18px] border border-[#cbc8bf] bg-[#f2f0e8] p-10 shadow-[0_8px_18px_rgba(31,31,29,0.08)]">
+        <div className="rounded-[18px] border border-[#cbc8bf] bg-[#f2f0e8] p-5 shadow-[0_8px_18px_rgba(31,31,29,0.08)] sm:p-10">
           <p className="mb-6 font-mono text-xs uppercase tracking-[0.32em] text-[#77736e]">
             Live · Step 02
           </p>
-          <div className="mb-10 flex items-start justify-between">
+          <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div className="flex items-center gap-3 rounded-full bg-[#efd9d4] px-4 py-2 font-mono text-[12px] uppercase tracking-[0.3em] text-[#a54040]">
               <span className="relative h-2.5 w-2.5">
                 <span className="absolute inset-0 animate-ping rounded-full bg-[#1b1b19]/45" />
@@ -187,23 +187,23 @@ export default function MeetingInProgress({ meeting }: MeetingInProgressProps) {
           {meeting.n ? <p className="mb-3 text-sm text-[#6c6861]">{meeting.n}</p> : null}
 
           <p className="font-mono leading-none text-[#161513]">
-            <span className="align-top text-[48px] text-[#3d3a35]">$</span>
-            <span className="text-[112px] font-semibold">{Math.floor(displayCost)}</span>
-            <span className="text-[56px] text-[#3d3a35]">.{String(Math.floor((displayCost % 1) * 100)).padStart(2, "0")}</span>
+            <span className="align-top text-[32px] text-[#3d3a35] sm:text-[48px]">$</span>
+            <span className="text-[72px] font-semibold sm:text-[112px]">{Math.floor(displayCost)}</span>
+            <span className="text-[36px] text-[#3d3a35] sm:text-[56px]">.{String(Math.floor((displayCost % 1) * 100)).padStart(2, "0")}</span>
           </p>
 
-          <p className="mt-2 font-mono text-[28px] text-[#4d4a44]">
+          <p className="mt-2 font-mono text-[16px] text-[#4d4a44] sm:text-[28px]">
             {formatMoney(cps * 60)} / min · {formatMoney(cps * 3600)} / hr
           </p>
 
-          <div className="mt-6 grid grid-cols-3 overflow-hidden rounded-[16px] border border-[#ccc8be] bg-[#f7f5ef]">
-            <div className="border-r border-dashed border-[#d2cec4] px-6 py-5">
+          <div className="mt-6 grid overflow-hidden rounded-[16px] border border-[#ccc8be] bg-[#f7f5ef] sm:grid-cols-3">
+            <div className="border-b border-dashed border-[#d2cec4] px-6 py-5 sm:border-b-0 sm:border-r">
               <p className="font-mono text-xs uppercase tracking-[0.26em] text-[#7a756d]">Duration</p>
               <p className="mt-2 font-mono text-[22px] font-semibold text-[#1e1d1b]">
                 {formatDuration((nowMs - meeting.t) / 1000)}
               </p>
             </div>
-            <div className="border-r border-dashed border-[#d2cec4] px-6 py-5">
+            <div className="border-b border-dashed border-[#d2cec4] px-6 py-5 sm:border-b-0 sm:border-r">
               <p className="font-mono text-xs uppercase tracking-[0.26em] text-[#7a756d]">Attendees</p>
               <p className="mt-2 font-mono text-[22px] font-semibold text-[#1e1d1b]">{meeting.a}</p>
             </div>
@@ -223,7 +223,7 @@ export default function MeetingInProgress({ meeting }: MeetingInProgressProps) {
             </p>
           </div>
 
-          <div className="mt-8 grid grid-cols-[1fr_auto] gap-3">
+          <div className="mt-8 grid gap-3 sm:grid-cols-[1fr_auto]">
             <button
               onClick={handleEndMeeting}
               className="rounded-[14px] bg-[#181715] px-6 py-4 text-[16px] font-semibold uppercase tracking-[0.04em] text-[#efede6] transition-colors hover:bg-[#23211f]"
@@ -240,7 +240,7 @@ export default function MeetingInProgress({ meeting }: MeetingInProgressProps) {
         </div>
       </div>
 
-      <div className="mx-auto mt-10 flex w-full max-w-[1020px] items-center border-t border-dashed border-[#d4d1c9] pt-5">
+      <div className="mx-auto mt-10 hidden w-full max-w-[1020px] items-center border-t border-dashed border-[#d4d1c9] pt-5 md:flex">
         <p className="font-mono text-xs uppercase tracking-[0.24em] text-[#726f68]">State lives in the URL</p>
       </div>
     </div>

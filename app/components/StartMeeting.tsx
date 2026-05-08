@@ -28,22 +28,22 @@ export default function StartMeeting() {
   const halfHourMeeting = costPerHour / 2;
 
   return (
-    <div className="min-h-screen bg-[#eceae2] px-2 py-8 text-[#1f1f1d] md:px-6">
+    <div className="min-h-svh bg-[#eceae2] px-2 py-0 text-[#1f1f1d] md:min-h-screen md:px-6 md:py-8">
       <div className="mx-auto w-full max-w-[920px]">
-        <div className="flex items-center justify-between border-b border-dashed border-[#d4d1c9] pb-6">
-          <p className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.32em] text-[#2d2d2a]">
+        <div className="hidden flex-col gap-3 border-b border-dashed border-[#d4d1c9] pb-6 sm:flex-row sm:items-center sm:justify-between md:flex">
+          <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[#2d2d2a] sm:text-[12px] sm:tracking-[0.32em]">
             <span className="h-2.5 w-2.5 rounded-[3px] bg-[#1b1b19]" />
             This Could Have Been An Email
           </p>
-          <p className="font-mono text-[12px] uppercase tracking-[0.24em] text-[#76736d]">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#76736d] sm:text-[12px] sm:tracking-[0.24em]">
             2026.05.08 · No. 9835
           </p>
         </div>
 
-        <div className="mt-7 rounded-[18px] border border-[#cbc8bf] bg-[#f2f0e8] p-8 shadow-[0_8px_18px_rgba(31,31,29,0.08)]">
+        <div className="mt-0 rounded-[18px] border border-[#cbc8bf] bg-[#f2f0e8] p-5 shadow-[0_8px_18px_rgba(31,31,29,0.08)] sm:p-8 md:mt-7">
           <div className="mb-8">
             <p className="font-mono text-xs uppercase tracking-[0.32em] text-[#77736e]">Setup · Step 01</p>
-            <h1 className="mt-3 text-[52px] font-semibold leading-[1.1] tracking-[-0.02em] text-[#1d1d1b]">
+            <h1 className="mt-3 text-[34px] font-semibold leading-[1.1] tracking-[-0.02em] text-[#1d1d1b] sm:text-[52px]">
               Let&apos;s see what this&apos;ll cost the company.
             </h1>
             <p className="mt-3 max-w-[690px] text-[14px] leading-[1.4] text-[#4c4a45]">
@@ -71,7 +71,7 @@ export default function StartMeeting() {
             </div>
 
             <div>
-              <div className="mb-3 flex items-center justify-between">
+              <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                 <label className="font-mono text-xs uppercase tracking-[0.32em] text-[#52504b]">
                   Attendees
                 </label>
@@ -108,13 +108,13 @@ export default function StartMeeting() {
             </div>
 
             <div>
-              <div className="mb-3 flex items-center justify-between">
+              <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                 <label className="font-mono text-xs uppercase tracking-[0.32em] text-[#52504b]">
                   Average Seniority
                 </label>
                 <p className="text-[12px] text-[#74716b]">salary is approximate</p>
               </div>
-              <div className="grid grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                 {SENIORITY_ORDER.map((level) => (
                   <button
                     key={level}
@@ -160,12 +160,9 @@ export default function StartMeeting() {
           </div>
         </div>
 
-        <div className="mt-10 flex items-center justify-between border-t border-dashed border-[#d4d1c9] pt-5">
+        <div className="mt-10 hidden items-center border-t border-dashed border-[#d4d1c9] pt-5 md:flex">
           <p className="font-mono text-xs uppercase tracking-[0.24em] text-[#726f68]">
             State lives in the URL
-          </p>
-          <p className="font-mono text-xs uppercase tracking-[0.24em] text-[#726f68]">
-
           </p>
         </div>
       </div>
