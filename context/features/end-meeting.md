@@ -3,6 +3,7 @@
 The summary and receipt screen. Shown after ending a meeting, or when opening a URL that contains an end timestamp.
 
 **Display**
+reference @context/screenshots/Receipt.png
 
 *Header*
 - "Meeting ended" label
