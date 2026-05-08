@@ -155,7 +155,7 @@ export default function StartMeeting() {
               onClick={handleStart}
               className="h-[68px] w-full rounded-[14px] bg-[#181715] text-[16px] font-semibold text-[#efede6] shadow-[0_8px_16px_rgba(23,22,20,0.18)] transition-colors hover:bg-[#23211f]"
             >
-              Start the meter →
+              Start Meeting →
             </button>
           </div>
         </div>
