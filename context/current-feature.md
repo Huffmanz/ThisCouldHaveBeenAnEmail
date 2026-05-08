@@ -1,13 +1,19 @@
-# Current Feature
+# Current Feature: Optional Past Duration on Start Screen
 
 ## Status
-Not Started
+In Progress
 
 ## Goals
-- <!-- Add goals for the active feature -->
+- Add optional duration inputs on Screen 1 for meetings that already ended (hours and minutes)
+- Keep duration fields optional so normal "start now" behavior still works without filling them
+- When duration is provided, submit should create a completed meeting payload and go directly to Screen 3
+- Ensure the generated URL includes both `t` and `e` so the receipt is deterministic and shareable
+- Preserve existing Screen 1 styling/flow while adding the new optional controls clearly
 
 ## Notes
-- <!-- Add implementation notes and constraints -->
+- Duration represents elapsed meeting length prior to now; derive `t` from `Date.now() - durationMs` and set `e = Date.now()`
+- Validate and sanitize hours/minutes input (non-negative, minute normalization) before encoding
+- If optional duration is blank/zero, continue existing behavior and route to Screen 2
 
 ## History
 - Start Meeting (Screen 1): Implemented the setup screen with editable meeting inputs, URL-encoded meeting state, and screenshot-aligned styling.

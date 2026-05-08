@@ -10,22 +10,31 @@ export default function StartMeeting() {
   const [name, setName] = useState("");
   const [attendees, setAttendees] = useState(6);
   const [seniority, setSeniority] = useState<SeniorityLevel>("Mid");
+  const [isAlreadyEnded, setIsAlreadyEnded] = useState(false);
+  const [pastHours, setPastHours] = useState("");
+  const [pastMinutes, setPastMinutes] = useState("");
 
   function handleStart() {
+    const rawHours = Math.max(0, parseInt(pastHours, 10) || 0);
+    const rawMinutes = Math.max(0, parseInt(pastMinutes, 10) || 0);
+    const normalizedHours = rawHours + Math.floor(rawMinutes / 60);
+    const normalizedMinutes = rawMinutes % 60;
+    const durationMs = isAlreadyEnded ? (normalizedHours * 60 + normalizedMinutes) * 60 * 1000 : 0;
+    const now = Date.now();
+
     const state = {
-      t: Date.now(),
+      t: durationMs > 0 ? now - durationMs : now,
       a: attendees,
       s: SENIORITY_TIERS[seniority].salary,
+      ...(durationMs > 0 ? { e: now } : {}),
       ...(name.trim() ? { n: name.trim() } : {}),
     };
     router.push(`/?m=${encodeMeeting(state)}`);
   }
 
   const salary = SENIORITY_TIERS[seniority].salary;
-  const costPerSecond = (salary / 2080 / 3600) * attendees;
   const costPerMinute = (salary / 2080 / 60) * attendees;
   const costPerHour = (salary / 2080) * attendees;
-  const halfHourMeeting = costPerHour / 2;
 
   return (
     <div className="min-h-svh bg-[#eceae2] px-2 py-0 text-[#1f1f1d] md:min-h-screen md:px-6 md:py-8">
@@ -54,7 +63,7 @@ export default function StartMeeting() {
 
           <div className="space-y-7">
             <div>
-              <div className="mb-3 flex items-center justify-between">
+              <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                 <label className="font-mono text-xs uppercase tracking-[0.32em] text-[#52504b]">
                   Meeting Name
                 </label>
@@ -138,16 +147,74 @@ export default function StartMeeting() {
               </div>
             </div>
 
+            <div>
+              <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                <label className="font-mono text-xs uppercase tracking-[0.32em] text-[#52504b]">
+                  Already Ended?
+                </label>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsAlreadyEnded((prev) => {
+                      const next = !prev;
+                      if (!next) {
+                        setPastHours("");
+                        setPastMinutes("");
+                      }
+                      return next;
+                    });
+                  }}
+                  className={`inline-flex h-7 w-14 items-center rounded-full border px-1 transition-colors ${
+                    isAlreadyEnded
+                      ? "border-[#1d1c1a] bg-[#1a1917]"
+                      : "border-[#c9c5bb] bg-[#f7f5ef]"
+                  }`}
+                  aria-pressed={isAlreadyEnded}
+                  aria-label="Toggle already ended meeting"
+                >
+                  <span
+                    className={`h-5 w-5 rounded-full transition-transform ${
+                      isAlreadyEnded ? "translate-x-7 bg-[#efede6]" : "translate-x-0 bg-[#5a554e]"
+                    }`}
+                  />
+                </button>
+              </div>
+              {isAlreadyEnded ? (
+                <>
+                  <div className="grid grid-cols-[1fr_auto_1fr_auto] items-center gap-2">
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      value={pastHours}
+                      onChange={(e) => setPastHours(e.target.value.replace(/[^\d]/g, ""))}
+                      placeholder="0"
+                      className="h-12 rounded-[12px] border border-[#ccc8be] bg-[#f7f5ef] px-3 text-center text-[16px] text-[#2e2d2a] placeholder:text-[#8a877f] focus:outline-none"
+                      aria-label="Past meeting hours"
+                    />
+                    <span className="font-mono text-xs uppercase tracking-[0.24em] text-[#6d6963]">hr</span>
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      value={pastMinutes}
+                      onChange={(e) => setPastMinutes(e.target.value.replace(/[^\d]/g, ""))}
+                      placeholder="0"
+                      className="h-12 rounded-[12px] border border-[#ccc8be] bg-[#f7f5ef] px-3 text-center text-[16px] text-[#2e2d2a] placeholder:text-[#8a877f] focus:outline-none"
+                      aria-label="Past meeting minutes"
+                    />
+                    <span className="font-mono text-xs uppercase tracking-[0.24em] text-[#6d6963]">min</span>
+                  </div>
+                </>
+              ) : null}
+            </div>
+
             <div className="rounded-[14px] border border-dashed border-[#d8d4ca] bg-[#f8f6f0] px-6 py-5">
               <div className="grid grid-cols-[1fr_auto] gap-y-2">
-                <p className="font-mono text-[13px] tracking-[0.06em] text-[#6d6963]">per second</p>
-                <p className="font-mono text-[13px] font-semibold text-[#1f1f1d]">${costPerSecond.toFixed(2)}</p>
                 <p className="font-mono text-[13px] tracking-[0.06em] text-[#6d6963]">per minute</p>
                 <p className="font-mono text-[13px] font-semibold text-[#1f1f1d]">${costPerMinute.toFixed(2)}</p>
                 <p className="font-mono text-[13px] tracking-[0.06em] text-[#6d6963]">per hour</p>
                 <p className="font-mono text-[13px] font-semibold text-[#1f1f1d]">${costPerHour.toFixed(2)}</p>
-                <p className="font-mono text-[13px] tracking-[0.06em] text-[#6d6963]">30 min meeting</p>
-                <p className="font-mono text-[13px] font-semibold text-[#1f1f1d]">${halfHourMeeting.toFixed(2)}</p>
               </div>
             </div>
 
