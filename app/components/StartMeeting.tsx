@@ -181,29 +181,37 @@ export default function StartMeeting() {
               </div>
               {isAlreadyEnded ? (
                 <>
-                  <div className="grid grid-cols-[1fr_auto_1fr_auto] items-center gap-2">
-                    <input
-                      type="text"
-                      inputMode="numeric"
-                      pattern="[0-9]*"
-                      value={pastHours}
-                      onChange={(e) => setPastHours(e.target.value.replace(/[^\d]/g, ""))}
-                      placeholder="0"
-                      className="h-12 rounded-[12px] border border-[#ccc8be] bg-[#f7f5ef] px-3 text-center text-[16px] text-[#2e2d2a] placeholder:text-[#8a877f] focus:outline-none"
-                      aria-label="Past meeting hours"
-                    />
-                    <span className="font-mono text-xs uppercase tracking-[0.24em] text-[#6d6963]">hr</span>
-                    <input
-                      type="text"
-                      inputMode="numeric"
-                      pattern="[0-9]*"
-                      value={pastMinutes}
-                      onChange={(e) => setPastMinutes(e.target.value.replace(/[^\d]/g, ""))}
-                      placeholder="0"
-                      className="h-12 rounded-[12px] border border-[#ccc8be] bg-[#f7f5ef] px-3 text-center text-[16px] text-[#2e2d2a] placeholder:text-[#8a877f] focus:outline-none"
-                      aria-label="Past meeting minutes"
-                    />
-                    <span className="font-mono text-xs uppercase tracking-[0.24em] text-[#6d6963]">min</span>
+                  <div className="grid grid-cols-2 gap-2">
+                    <label className="relative min-w-0">
+                      <input
+                        type="text"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
+                        value={pastHours}
+                        onChange={(e) => setPastHours(e.target.value.replace(/[^\d]/g, ""))}
+                        placeholder="0"
+                        className="h-12 w-full rounded-[12px] border border-[#ccc8be] bg-[#f7f5ef] px-3 pr-9 text-center text-[16px] text-[#2e2d2a] placeholder:text-[#8a877f] focus:outline-none"
+                        aria-label="Past meeting hours"
+                      />
+                      <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[10px] uppercase tracking-[0.12em] text-[#6d6963]">
+                        hr
+                      </span>
+                    </label>
+                    <label className="relative min-w-0">
+                      <input
+                        type="text"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
+                        value={pastMinutes}
+                        onChange={(e) => setPastMinutes(e.target.value.replace(/[^\d]/g, ""))}
+                        placeholder="0"
+                        className="h-12 w-full rounded-[12px] border border-[#ccc8be] bg-[#f7f5ef] px-3 pr-10 text-center text-[16px] text-[#2e2d2a] placeholder:text-[#8a877f] focus:outline-none"
+                        aria-label="Past meeting minutes"
+                      />
+                      <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 font-mono text-[10px] uppercase tracking-[0.12em] text-[#6d6963]">
+                        min
+                      </span>
+                    </label>
                   </div>
                 </>
               ) : null}
