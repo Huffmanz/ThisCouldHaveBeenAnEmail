@@ -1,1 +1,24 @@
-@AGENTS.md
+# Devstash
+A developer knowledge hub for snippets, commands, prompts, notes, files, images, links, and custom types.
+
+## Context files
+read the following to get the full context of the project:
+- @context/project-overview.md
+- @context/coding-standards.md
+- @context/ai-interaction.md
+- @context/current-feature.md
+
+## Commands
+
+```bash
+npm run dev      # start dev server
+npm run build    # production build
+npm run lint     # run eslint
+```
+
+## Stack
+
+- **Next.js 16.2.4** with the App Router (`src/app/`)
+- **React 19**
+- **TypeScript**
+- **Tailwind CSS v4** — imported via `@import "tailwindcss"` in `globals.css`, configured through `@tailwindcss/postcss`
