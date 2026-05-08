@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# This Could Have Been an Email
 
-## Getting Started
+A lightweight meeting-cost calculator that makes the real-time cost of meetings visible, then reframes that spend as tangible alternatives.
 
-First, run the development server:
+## Purpose
+
+This app is designed to answer one question quickly:
+
+**"What is this meeting costing right now?"**
+
+It computes meeting cost from wall-clock time, attendee count, and estimated seniority salary tiers, then:
+
+- shows a live running total while the meeting is in progress
+- keeps meeting state fully shareable via a single encoded URL
+- generates an end-of-meeting receipt showing what that money could have bought instead
+
+## How It Works
+
+- No backend or database; all state lives in the URL (`?m=...`)
+- Time math is anchored to timestamps (`start` and optional `end`) rather than in-memory counters
+- Live screen uses smooth animation while staying accurate after tab sleep/backgrounding
+- End screen freezes totals and renders receipt alternatives from configurable constants
+
+## Run Locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+```
