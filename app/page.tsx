@@ -1,5 +1,6 @@
 import StartMeeting from "./components/StartMeeting";
 import MeetingInProgress from "./components/MeetingInProgress";
+import MeetingEnded from "./components/MeetingEnded";
 import { decodeMeeting } from "./lib/meeting";
 
 export default async function Home({
@@ -19,8 +20,7 @@ export default async function Home({
   }
 
   if (meeting.e) {
-    // Screen 3 comes next; for now keep fallback behavior.
-    return <StartMeeting />;
+    return <MeetingEnded meeting={meeting} />;
   }
 
   return <MeetingInProgress meeting={meeting} />;

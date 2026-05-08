@@ -146,6 +146,9 @@ export default function MeetingInProgress({ meeting }: MeetingInProgressProps) {
         </div>
 
         <div className="rounded-[18px] border border-[#cbc8bf] bg-[#f2f0e8] p-10 shadow-[0_8px_18px_rgba(31,31,29,0.08)]">
+          <p className="mb-6 font-mono text-xs uppercase tracking-[0.32em] text-[#77736e]">
+            Live · Step 02
+          </p>
           <div className="mb-10 flex items-start justify-between">
             <div className="flex items-center gap-3 rounded-full bg-[#efd9d4] px-4 py-2 font-mono text-[12px] uppercase tracking-[0.3em] text-[#a54040]">
               <span className="relative h-2.5 w-2.5">
@@ -237,9 +240,8 @@ export default function MeetingInProgress({ meeting }: MeetingInProgressProps) {
         </div>
       </div>
 
-      <div className="mx-auto mt-10 flex w-full max-w-[1020px] items-center justify-between border-t border-dashed border-[#d4d1c9] pt-5">
+      <div className="mx-auto mt-10 flex w-full max-w-[1020px] items-center border-t border-dashed border-[#d4d1c9] pt-5">
         <p className="font-mono text-xs uppercase tracking-[0.24em] text-[#726f68]">State lives in the URL</p>
-        <p className="font-mono text-xs uppercase tracking-[0.24em] text-[#726f68]">Anchored to wall-clock</p>
       </div>
     </div>
   );
